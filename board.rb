@@ -38,7 +38,7 @@ class Board
   def populate_rows
     # could refactor this using board size if i wanted to have
     # some weird big chess game.
-    
+
     @rows.each_with_index do |row, y|
       next if y > 3 && y < 6
       row.each_index do |x|
