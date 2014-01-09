@@ -12,6 +12,7 @@ class Checkers
     until game_over?
       @board.display
       @players.first.choose_move
+      @board.update
       @players.rotate!
       switch(@color_of_current_player)
     end
@@ -50,9 +51,9 @@ class HumanPlayer
   end
 end
 
-if __FILE__ == $PROGRAM_NAME
-  h1 = HumanPlayer.new("Mickey")
-  h2 = HumanPlayer.new("Other Guy")
-  Checkers.new(h1,h2).run
-end
+# if __FILE__ == $PROGRAM_NAME
+#   h1 = HumanPlayer.new("Mickey")
+#   h2 = HumanPlayer.new("Other Guy")
+#   Checkers.new(h1,h2).run
+# end
 

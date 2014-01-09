@@ -17,8 +17,6 @@ class Board
   end
 
   def display
-    update_board
-
     puts
     @rows.each_with_index do |row, y|
       row.each_with_index do |spot, x|
@@ -37,7 +35,7 @@ class Board
     puts
   end
 
-  def update_board
+  def update
     de_populate_rows
     populate_rows
   end

@@ -8,21 +8,33 @@ class Piece
     @icon = (@color == :white) ? "\u25CB" : "\u25CF"
   end
 
-  def slide(to)
+  def slide_to(y, x)
+    diff = [y - @current_pos[0], x - @current_pos[1]]
+
+    raise "I, a piece, cannot slide in such a way!" unless slide_diffs.include?(diff)
+
+    @current_pos = [y, x]
   end
 
-  def jump(to)
+  def jump_to(y, x)
+    @current_pos = [y, x]
   end
 
-  def move_diffs
+  def slide_diffs
     # white always starts on bottom
     # hence, it can only move up
     if @color == :white && @king == false
-      [[-1, 1],[-1, 1]]
+      [[-1, -1],[-1, 1]]
     elsif @color == :black && @king == false
-      [[1, 1], [1, 1]]
+      [[1, 1], [1, -1]]
     else
       [[-1, 1], [-1, 1], [1, 1], [1, 1]]
     end
   end
 end
+
+b = Board.new
+b.display
+b[[6,1]].slide_to(5,2)
+b.update
+b.display
