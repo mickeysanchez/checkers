@@ -49,7 +49,9 @@ class HumanPlayer
   end
 end
 
-h1 = HumanPlayer.new("Mickey")
-h2 = HumanPlayer.new("Other Guy")
-c = Checkers.new(h1,h2)
-c.run
+if __FILE__ == $PROGRAM_NAME
+  h1 = HumanPlayer.new("Mickey")
+  h2 = HumanPlayer.new("Other Guy")
+  Checkers.new(h1,h2).run
+end
+
