@@ -19,8 +19,8 @@ class Board
   end
 
   def display
-    puts
-    print "   0  1  2  3  4  5  6  7  8  9"
+    print "\n  "
+    (0..BOARD_SIZE-1).each {|x| print " #{x} "}
     puts
     @rows.each_with_index do |row, y|
       print y.to_s + " "
@@ -35,12 +35,11 @@ class Board
           print show
         end
       end
-      print " " + y.to_s
-      puts
+      print " " + y.to_s + "\n"
     end
-    print "   0  1  2  3  4  5  6  7  8  9"
-    puts
-    puts
+    print "  "
+    (0..BOARD_SIZE-1).each {|x| print " #{x} "}
+    print "\n\n"
   end
 
   def update

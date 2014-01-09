@@ -34,6 +34,5 @@ class Piece
       else
         [[-1, 1], [-1, -1], [1, 1], [1, -1]]
       end
-      en
   end
 end
