@@ -18,19 +18,15 @@ class Board
     puts
     @rows.each_with_index do |row, y|
       row.each_with_index do |spot, x|
-        if spot.nil?
-          if y.even? && x.even? || y.odd? && x.odd?
-            print "   ".colorize(background: :red)
-          else
-            print "   "
-          end
+
+        show = (spot.nil?) ? "   " : " #{spot.icon} "
+
+        if y.even? && x.even? || y.odd? && x.odd?
+          print show.colorize(background: :red)
         else
-          if y.even? && x.even? || y.odd? && x.odd?
-            print " #{spot.icon} ".colorize(background: :red)
-          else
-            print " #{spot.icon} "
-          end
+          print show
         end
+
       end
       puts
     end
