@@ -213,8 +213,10 @@ class Board
       next if piece.current_pos.nil?
       if piece.color == :white && piece.current_pos[0] == 0
         piece.king = true
+        piece.icon = "\2654"
       elsif piece.color == :black && piece.current_pos[0] == (BOARD_SIZE-1)
         piece.king = true
+        piece.icon = "\265A"
       end
     end
   end

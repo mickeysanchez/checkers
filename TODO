@@ -5,4 +5,7 @@
       move = [[x,y],[x,y]]
       moves = [[x,y], [[x,y], [x,y]]]
 
-2. 
+2. Make a computer player. 
+
+3. REFACTOR:
+   
