@@ -1,6 +1,7 @@
 require_relative "board"
 require_relative "piece"
 require_relative "human_player"
+require "debugger"
 
 class Checkers
   def initialize(player1, player2)
@@ -32,14 +33,14 @@ class Checkers
     begin
       move = @players.first.choose_move
       from = move[0]
-      
+
       raise "You're trying to move nothing..." if @board[from].nil?
       raise "Move your own piece!" if @board[from].color != @color_of_current_player
-      
+
       @board.make_move(move)
-      
+
     rescue StandardError => e
-      puts e.message
+      puts e
       retry
     end
   end

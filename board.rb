@@ -49,28 +49,29 @@ class Board
   end
 
   def make_move(move)
-    check_input
+    # debugger
+    check_input(move)
 
     from, to = move
     y,x = from
+
     piece = @rows[y][x]
+    y,x = to
 
-    begin
-      y,x = to
+    # check if it can slide
+    if piece.possible_slide?(y,x)
+      # if it can slide... SLIDE IT!
       piece.slide_to(y,x)
-
-      # if you can't slide, jummmp!!!
-      # this is bad. it'll never tell you
-      # the slide error.
-    rescue
+    else
+      # check if it can jump
       if valid_jump?(move)
+        # if can jump... JUMP IT!
         piece.jump_to(y,x)
-
         between = between(from, to)
-
+        # kill the piece in between
         self[between].current_pos = nil
       else
-        raise "Invalid jump attempt."
+        raise "Invalid move."
       end
     end
   end
