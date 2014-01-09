@@ -14,6 +14,8 @@ class Checkers
 
       begin
         move = @players.first.choose_move
+        from = move[0]
+        raise "Move your own piece!" if @board[from].color != @color_of_current_player
         @board.make_move(move)
       rescue StandardError => e
         puts e.message

@@ -20,7 +20,11 @@ class Board
 
   def display
     puts
+    print "   0  1  2  3  4  5  6  7  8  9"
+    puts
     @rows.each_with_index do |row, y|
+      print y.to_s + " "
+
       row.each_with_index do |spot, x|
 
         show = (spot.nil?) ? "   " : " #{spot.icon} "
@@ -30,10 +34,12 @@ class Board
         else
           print show
         end
-
       end
+      print " " + y.to_s
       puts
     end
+    print "   0  1  2  3  4  5  6  7  8  9"
+    puts
     puts
   end
 
