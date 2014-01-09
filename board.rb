@@ -15,7 +15,11 @@ class Board
   private
 
   def populate_rows
-    # sets up initial game state
+    @rows.each_with_index do |row, y|
+      rows.each_with_index do |spot,x|
+        @rows[y][x] = Piece.new if x % 2 == 0
+      end
+    end
   end
 
   def valid?(pos)
