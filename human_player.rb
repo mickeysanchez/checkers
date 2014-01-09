@@ -18,7 +18,6 @@ class HumanPlayer
     if to.include?(" ")
       to = to.split(" ")
       to = to.map! { |coord| coord.split(",").map(&:to_i) }
-      p to
     else
       to = to.split(",").map(&:to_i)
     end

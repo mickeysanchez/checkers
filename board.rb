@@ -82,7 +82,17 @@ class Board
   private
 
   def multiple_jumps(moves)
-    raise "MULTIPLE MOVESSSS"
+    raise "Invalid jump sequence" unless valid_jump_sequence?(moves)
+    from, destinations = moves
+
+    # if it's true we'll perform the whole sequence
+    destinations.each do |destination|
+      piece = self[from]
+      y, x = destination
+      piece.jump_to(y, x)
+      from = destination
+      update
+    end
   end
 
   def check_input(positions)
