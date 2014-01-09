@@ -22,6 +22,9 @@ class HumanPlayer
       to = to.split(",").map(&:to_i)
     end
 
+    p from.count
+    p to.count
+
     [from, to]
   end
 end

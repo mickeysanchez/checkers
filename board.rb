@@ -1,7 +1,7 @@
 require 'colorize'
 
 class Board
-  attr_reader :pieces
+  attr_accessor :pieces
 
   BOARD_SIZE = 10
 
@@ -48,13 +48,13 @@ class Board
   end
 
   def make_move(moves)
-    return multiple_jumps(moves) if moves[1].count > 1
+    if moves[1][1].is_a?(Array)
+      return multiple_jumps(moves)
+    end
 
-    move = [moves[0], moves[1]]
+    check_input(moves)
 
-    check_input(move)
-
-    from, to = move
+    from, to = moves
     y,x = from
 
     piece = @rows[y][x]
@@ -66,7 +66,7 @@ class Board
       piece.slide_to(y,x)
     else
       # check if it can jump
-      if valid_jump?(move)
+      if valid_jump?(moves)
         # if can jump... JUMP IT!
         piece.jump_to(y,x)
         between = between(from, to)
@@ -78,6 +78,22 @@ class Board
     end
   end
 
+  protected
+
+  def dup
+    duped_board = Board.new
+    duped_pieces = []
+
+    @pieces.each do |piece|
+      color = piece.color
+      pos = piece.current_pos
+      duped_piece = Piece.new(color, pos)
+      duped_pieces << duped_piece
+    end
+
+    duped_board.pieces = duped_pieces
+    duped_board.update
+  end
 
   private
 
@@ -93,6 +109,28 @@ class Board
       from = destination
       update
     end
+  end
+
+  def valid_jump_sequence?(moves)
+    from, destinations = moves
+
+    duped_board = self.dup
+
+
+    destinations.each do |destination|
+      # check if the move is a valid jump
+      # if so, perform it and check again
+      move = [from, destination]
+      return false unless valid_jump?(move)
+
+      piece = duped_board[from]
+      y, x = destination
+      piece.jump_to(y, x)
+      from = destination
+      duped_board.update
+    end
+
+    true
   end
 
   def check_input(positions)
