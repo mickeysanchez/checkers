@@ -16,6 +16,8 @@ class Checkers
       switch(@color_of_current_player)
     end
 
+    @board.display
+
     puts "#{@players.first.name}, #{@color_of_current_player}, has been defeated."
   end
 
@@ -27,7 +29,7 @@ class Checkers
   end
 
   def game_over?
-    false
+    true
     # when there are no more pieces of color @color_of_current_player
   end
 end
