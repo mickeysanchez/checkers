@@ -17,6 +17,8 @@ class Board
   end
 
   def display
+    update_board
+
     puts
     @rows.each_with_index do |row, y|
       row.each_with_index do |spot, x|
@@ -35,6 +37,15 @@ class Board
     puts
   end
 
+  def update_board
+    de_populate_rows
+    populate_rows
+  end
+
+
+
+  private
+
   def populate_rows
     de_populate_rows
     @pieces.each do |piece|
@@ -42,8 +53,6 @@ class Board
       @rows[y][x] = piece
     end
   end
-
-  private
 
   def create_pieces
     0.upto(BOARD_SIZE-1) do |y|

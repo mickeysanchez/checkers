@@ -18,8 +18,9 @@ class Checkers
 
     @board.display
 
-    puts "#{@players.first.name}, #{@color_of_current_player}, has been defeated."
+    puts "#{@players.first.name}, of the color #{@color_of_current_player}, has been defeated."
   end
+
 
   private
 
