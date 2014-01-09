@@ -1,6 +1,6 @@
 class Piece
   attr_reader :color, :icon
-  attr_accessor :current_pos
+  attr_accessor :current_pos, :king
 
   def initialize(color, pos)
     @color = color
@@ -32,7 +32,8 @@ class Piece
       elsif @color == :black && @king == false
         [[1, 1], [1, -1]]
       else
-        [[-1, 1], [-1, 1], [1, 1], [1, 1]]
+        [[-1, 1], [-1, -1], [1, 1], [1, -1]]
       end
-    end
+      en
+  end
 end

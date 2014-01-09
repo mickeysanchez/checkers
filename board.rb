@@ -46,6 +46,7 @@ class Board
   def update
     de_populate_rows
     populate_rows
+    make_men_into_kings
   end
 
   def make_move(move)
@@ -152,5 +153,16 @@ class Board
   def on_board?(pos)
     y, x = pos
     y < BOARD_SIZE && y >= 0 && x < BOARD_SIZE && x >= 0
+  end
+
+  def make_men_into_kings
+    @pieces.each do |piece|
+      next if piece.current_pos.nil?
+      if piece.color == :white && piece.current_pos[0] == 0
+        piece.king = true
+      elsif piece.color == :black && piece.current_pos[0] == (BOARD_SIZE-1)
+        piece.king = true
+      end
+    end
   end
 end
