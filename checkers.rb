@@ -1,5 +1,6 @@
 require_relative "board"
 require_relative "piece"
+require_relative "human_player"
 
 class Checkers
   def initialize(player1, player2)
@@ -48,27 +49,6 @@ class Checkers
   def game_over?
     # when there are no more pieces of color @color_of_current_player
     !@board.pieces.any? { |piece| piece.color == @color_of_current_player }
-  end
-end
-
-class HumanPlayer
-  attr_reader :name
-
-  def initialize(name)
-    @name = name
-  end
-
-  def choose_move
-    puts "#{@name}:"
-    puts "Move from:"
-    from = gets.chomp
-    from = from.split(",").map(&:to_i)
-
-    puts "Move to:"
-    to = gets.chomp
-    to = to.split(",").map(&:to_i)
-
-    [from, to]
   end
 end
 
