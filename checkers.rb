@@ -10,6 +10,7 @@ class Checkers
 
   def run
     until game_over?
+      puts game_over?
       @board.display
       @players.first.choose_move
       @board.update
@@ -31,8 +32,8 @@ class Checkers
   end
 
   def game_over?
-    true
     # when there are no more pieces of color @color_of_current_player
+    !@board.pieces.any? { |piece| piece.color == @color_of_current_player }
   end
 end
 
@@ -51,9 +52,9 @@ class HumanPlayer
   end
 end
 
-# if __FILE__ == $PROGRAM_NAME
-#   h1 = HumanPlayer.new("Mickey")
-#   h2 = HumanPlayer.new("Other Guy")
-#   Checkers.new(h1,h2).run
-# end
+if __FILE__ == $PROGRAM_NAME
+  h1 = HumanPlayer.new("Mickey")
+  h2 = HumanPlayer.new("Other Guy")
+  Checkers.new(h1,h2).run
+end
 

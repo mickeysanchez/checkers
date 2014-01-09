@@ -11,7 +11,7 @@ class Piece
   def slide_to(y, x)
     diff = [y - @current_pos[0], x - @current_pos[1]]
 
-    raise "I, a piece, cannot slide in such a way!" unless slide_diffs.include?(diff)
+    raise "I, a piece, cannot slide in such a way!" unless    slide_diffs.include?(diff)
 
     @current_pos = [y, x]
   end
@@ -20,21 +20,24 @@ class Piece
     @current_pos = [y, x]
   end
 
-  def slide_diffs
-    # white always starts on bottom
-    # hence, it can only move up
-    if @color == :white && @king == false
-      [[-1, -1],[-1, 1]]
-    elsif @color == :black && @king == false
-      [[1, 1], [1, -1]]
-    else
-      [[-1, 1], [-1, 1], [1, 1], [1, 1]]
+
+  private
+
+    def slide_diffs
+      # white always starts on bottom
+      # hence, it can only move up
+      if @color == :white && @king == false
+        [[-1, -1],[-1, 1]]
+      elsif @color == :black && @king == false
+        [[1, 1], [1, -1]]
+      else
+        [[-1, 1], [-1, 1], [1, 1], [1, 1]]
+      end
     end
-  end
 end
 
-b = Board.new
-b.display
-b[[6,1]].slide_to(5,2)
-b.update
-b.display
+# b = Board.new
+# b.display
+# b[[6,1]].slide_to(5,2)
+# b.update
+# b.display

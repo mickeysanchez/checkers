@@ -1,6 +1,8 @@
 require 'colorize'
 
 class Board
+  attr_reader :pieces
+
   BOARD_SIZE = 10
 
   def initialize
