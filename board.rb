@@ -57,8 +57,14 @@ class Board
     y,x = from
     piece = @rows[y][x]
 
-    y,x = to
-    piece.slide_to(y,x)
+    begin
+      y,x = to
+      piece.slide_to(y,x)
+
+      # if you can't slide, jummmp!!!
+    rescue
+      piece.jump_to(y,x)
+    end
   end
 
 
