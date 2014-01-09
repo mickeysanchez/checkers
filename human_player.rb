@@ -12,6 +12,7 @@ class HumanPlayer
     from = from.split(",").map(&:to_i)
 
     puts "Move to:"
+    puts "(Add a space between coordinates to perform multiple jumps.)"
     to = gets.chomp
 
     # recognizes and parses a multiple jump sequence
@@ -21,9 +22,6 @@ class HumanPlayer
     else
       to = to.split(",").map(&:to_i)
     end
-
-    p from.count
-    p to.count
 
     [from, to]
   end

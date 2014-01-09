@@ -1,1 +1,8 @@
-# multiple jumps
+1. Standardize inputs across different methods.
+   e.g. some methods take (x,y) some take ([x,y])
+   right now it's close to being like this:
+      pos = [x,y]
+      move = [[x,y],[x,y]]
+      moves = [[x,y], [[x,y], [x,y]]]
+
+2. 
