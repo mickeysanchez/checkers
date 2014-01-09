@@ -63,12 +63,37 @@ class Board
 
       # if you can't slide, jummmp!!!
     rescue
-      piece.jump_to(y,x)
+      if valid_jump?(move)
+        piece.jump_to(y,x)
+      else
+        raise "Invalid jump attempt."
+      end
     end
   end
 
 
   private
+
+  def valid_jump?(move)
+    from, to = move
+
+    return false unless self[to].nil?
+
+    y1, x1 = from
+    y2, x2 = to
+
+    y3 = (y2 < y1) ? y1 - 1 : y1 + 1
+    x3 = (x2 > x1) ? x1 + 1 : x1 - 1
+
+    between = [y3, x3]
+
+    moving_player = self[from]
+
+    return false if self[between].nil?
+
+    # is the spot between a player of a different color?
+    self[between].color != moving_player.color
+  end
 
   def populate_rows
     de_populate_rows
