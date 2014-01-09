@@ -65,6 +65,19 @@ class Board
     rescue
       if valid_jump?(move)
         piece.jump_to(y,x)
+
+        # this logic is used twice and should be refactored
+        from, to = move
+
+        y1, x1 = from
+        y2, x2 = to
+
+        y3 = (y2 < y1) ? y1 - 1 : y1 + 1
+        x3 = (x2 > x1) ? x1 + 1 : x1 - 1
+
+        between = [y3, x3]
+
+        self[between].current_pos = nil
       else
         raise "Invalid jump attempt."
       end
@@ -98,6 +111,8 @@ class Board
   def populate_rows
     de_populate_rows
     @pieces.each do |piece|
+      # a piece without a current_pos has been removed from the board.
+      next if piece.current_pos.nil?
       y, x = piece.current_pos
       @rows[y][x] = piece
     end
