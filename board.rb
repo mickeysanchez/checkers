@@ -42,6 +42,18 @@ class Board
     populate_rows
   end
 
+  def make_move(move)
+    from, to = move
+
+    raise "Your first position is invalid." unless on_board?(to)
+    raise "Your second position is invalid." unless on_board?(from)
+
+    y,x = from
+    piece = @rows[y][x]
+
+    y,x = to
+    piece.slide_to(y,x)
+  end
 
 
   private
@@ -84,6 +96,6 @@ class Board
 
   def on_board?(pos)
     y, x = pos
-    y < BOARD_SIZE && y >= 0 && x < BOARD_SIZE && x >= 0
+    y <= BOARD_SIZE-1 && y >= 0 && x <= BOARD_SIZE-1 && x >= 0
   end
 end

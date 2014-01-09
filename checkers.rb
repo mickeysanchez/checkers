@@ -11,7 +11,15 @@ class Checkers
   def run
     until game_over?
       @board.display
-      @players.first.choose_move
+
+      begin
+        move = @players.first.choose_move
+        @board.make_move(move)
+      rescue StandardError => e
+        puts e.message
+        retry
+      end
+
       @board.update
       @players.rotate!
       switch(@color_of_current_player)
@@ -47,11 +55,11 @@ class HumanPlayer
     puts "#{@name}:"
     puts "Move from:"
     from = gets.chomp
-    from = from.split(",")
+    from = from.split(",").map(&:to_i)
 
-    "Move to:"
+    puts "Move to:"
     to = gets.chomp
-    to = to.split(",")
+    to = to.split(",").map(&:to_i)
 
     [from, to]
   end
