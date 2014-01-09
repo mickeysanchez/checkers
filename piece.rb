@@ -35,9 +35,3 @@ class Piece
       end
     end
 end
-
-# b = Board.new
-# b.display
-# b[[6,1]].slide_to(5,2)
-# b.update
-# b.display
