@@ -66,16 +66,7 @@ class Board
       if valid_jump?(move)
         piece.jump_to(y,x)
 
-        # this logic is used twice and should be refactored
-        from, to = move
-
-        y1, x1 = from
-        y2, x2 = to
-
-        y3 = (y2 < y1) ? y1 - 1 : y1 + 1
-        x3 = (x2 > x1) ? x1 + 1 : x1 - 1
-
-        between = [y3, x3]
+        between = between(from, to)
 
         self[between].current_pos = nil
       else
@@ -92,13 +83,7 @@ class Board
 
     return false unless self[to].nil?
 
-    y1, x1 = from
-    y2, x2 = to
-
-    y3 = (y2 < y1) ? y1 - 1 : y1 + 1
-    x3 = (x2 > x1) ? x1 + 1 : x1 - 1
-
-    between = [y3, x3]
+    between = between(from, to)
 
     moving_player = self[from]
 
@@ -144,6 +129,16 @@ class Board
         @rows[y][x] = nil
       end
     end
+  end
+
+  def between(from, to)
+    y1, x1 = from
+    y2, x2 = to
+
+    y3 = (y2 < y1) ? y1 - 1 : y1 + 1
+    x3 = (x2 > x1) ? x1 + 1 : x1 - 1
+
+    [y3, x3]
   end
 
   def on_board?(pos)
