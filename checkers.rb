@@ -10,7 +10,6 @@ class Checkers
 
   def run
     until game_over?
-      puts game_over?
       @board.display
       @players.first.choose_move
       @board.update
@@ -45,10 +44,16 @@ class HumanPlayer
   end
 
   def choose_move
-    "From:"
-    # chooses two coordinates.
-    # doesn't allow either coordinate to be invalid.
-    "To:"
+    puts "#{@name}:"
+    puts "Move from:"
+    from = gets.chomp
+    from = from.split(",")
+
+    "Move to:"
+    to = gets.chomp
+    to = to.split(",")
+
+    [from, to]
   end
 end
 
