@@ -25,8 +25,7 @@ class Piece
   private
 
   def slide_diffs
-      # white always starts on bottom
-      # hence, it can only move up
+      # white always starts on bottom hence it can only move up.
       if @color == :white && @king == false
         [[-1, -1],[-1, 1]]
       elsif @color == :black && @king == false

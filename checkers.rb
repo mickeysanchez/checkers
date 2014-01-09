@@ -31,7 +31,7 @@ class Checkers
 
   def move_loop
     begin
-      move = @players.first.choose_move
+      move = @players.first.choose_move(@board)
       from = move[0]
 
       raise "You're trying to move nothing..." if @board[from].nil?

@@ -43,13 +43,15 @@ class Board
   end
 
   def update
-    de_populate_rows
     populate_rows
     make_men_into_kings
   end
 
-  def make_move(move)
-    # debugger
+  def make_move(moves)
+    return multiple_jumps(moves) if moves[1].count > 1
+
+    move = [moves[0], moves[1]]
+
     check_input(move)
 
     from, to = move
@@ -78,6 +80,10 @@ class Board
 
 
   private
+
+  def multiple_jumps(moves)
+    raise "MULTIPLE MOVESSSS"
+  end
 
   def check_input(positions)
     from, to = positions
