@@ -11,8 +11,9 @@ class Piece
 
   def slide_to(y, x)
     diff = [y - @current_pos[0], x - @current_pos[1]]
-
-    raise "I, a piece, cannot slide in such a way!" unless    slide_diffs.include?(diff)
+    
+    error_message = "I, a piece, cannot slide in such a way!"
+    raise error_message unless slide_diffs.include?(diff)
 
     @current_pos = [y, x]
   end

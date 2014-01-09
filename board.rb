@@ -49,11 +49,9 @@ class Board
   end
 
   def make_move(move)
+    check_input
+
     from, to = move
-
-    raise "Your first position is invalid." unless on_board?(to)
-    raise "Your second position is invalid." unless on_board?(from)
-
     y,x = from
     piece = @rows[y][x]
 
@@ -62,6 +60,8 @@ class Board
       piece.slide_to(y,x)
 
       # if you can't slide, jummmp!!!
+      # this is bad. it'll never tell you
+      # the slide error.
     rescue
       if valid_jump?(move)
         piece.jump_to(y,x)
@@ -77,6 +77,13 @@ class Board
 
 
   private
+
+  def check_input(positions)
+    from, to = positions
+
+    raise "Your first position is invalid." unless on_board?(to)
+    raise "Your second position is invalid." unless on_board?(from)
+  end
 
   def valid_jump?(move)
     from, to = move
@@ -143,6 +150,6 @@ class Board
 
   def on_board?(pos)
     y, x = pos
-    y <= BOARD_SIZE-1 && y >= 0 && x <= BOARD_SIZE-1 && x >= 0
+    y < BOARD_SIZE && y >= 0 && x < BOARD_SIZE && x >= 0
   end
 end
