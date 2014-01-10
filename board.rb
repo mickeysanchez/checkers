@@ -4,14 +4,19 @@ class Board
   attr_accessor :pieces
 
   BOARD_SIZE = 10
-
+	#REV: Don't create an array of pieces, you can just do the @rows.flatten.compact
+	#it leads to problems in the future because you need to maintain 2 things that have basically the same info in them (@rows and @pieces)
   def initialize
     @rows = Array.new(BOARD_SIZE) {Array.new(BOARD_SIZE) {nil}}
     @pieces = []
     create_pieces
     populate_rows
   end
-
+   #REV: use the setter for this as well, very useful
+   #it's something like:
+   #def []=(pos, value)  
+   #i,j=pos
+   #@rows[i][j]=value   end
   def [](pos)
     raise "pos not on board" unless on_board?(pos)
     i, j = pos
@@ -46,7 +51,7 @@ class Board
     populate_rows
     make_men_into_kings
   end
-
+#REV: Too many comments, don't need after every line
   def make_move(moves)
     if moves[1][1].is_a?(Array)
       return multiple_jumps(moves)
@@ -139,7 +144,8 @@ class Board
     raise "Your first position is invalid." unless on_board?(to)
     raise "Your second position is invalid." unless on_board?(from)
   end
-
+	#REV: Should have a different variable name from method name (between)
+	#little confusing
   def valid_jump?(move)
     from, to = move
 
@@ -184,7 +190,9 @@ class Board
       end
     end
   end
-
+	#REV: I think this would use up unnecessary resources removing every piece 
+	# and then re-adding the piece after every move.  Unless you are planning to 
+	#add undo functionality, you could just set the piece to nil
   def de_populate_rows
     @rows.each_with_index do |row, y|
       row.each_index do |x|
