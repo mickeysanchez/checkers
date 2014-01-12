@@ -1,7 +1,7 @@
 require_relative "board"
 require_relative "piece"
 require_relative "human_player"
-require "debugger"
+require_relative "networked_player"
 
 class Checkers
   def initialize(player1, player2)
@@ -58,7 +58,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   h1 = HumanPlayer.new("Mickey")
-  h2 = HumanPlayer.new("Other Guy")
+  h2 = NetworkedPlayer.new("Networked Player")
   Checkers.new(h1,h2).run
 end
 
