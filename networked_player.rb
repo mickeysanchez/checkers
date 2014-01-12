@@ -1,37 +1,42 @@
 require "socket"
 
-
-
-
 class NetworkedPlayer
   attr_reader :name
 
   def initialize(name)
     @name = name
+    @send_socket = UDPSocket.new
+    @send_socket.setsockopt(:SOCKET, :SO_BROADCAST, 1)
+    @receive_socket = UDPSocket.new
+    @receive_socket.bind "", 31338
   end
 
   def choose_move(board) 
-    send_socket = UDPSocket.new
 
-    send_socket.setsockopt(:SOCKET, :SO_BROADCAST, 1)
-
-    receive_socket = UDPSocket.new
-
-    receive_socket.bind "", 31338
-    
-    
-    message = "#{@name}: \n Move from: \n"
-    send_socket.send message, 0, "255.255.255.255", 31337
-
-    while from = receive_socket.gets.chomp
+      
+    while message = "Move from:"
+      puts "sending"
+      10.times do
+        @send_socket.send message, 0, "255.255.255.255", 31337
+      end
+      break
     end
+
+    while from = @receive_socket.gets.chomp
+      break
+    end
+
+    puts from
     
     from = from.split(",").map(&:to_i)
 
-    message = "Move to: \n (Add a space between coordinates to perform multiple jumps.)"
+    message = "Move to:"
+    @send_socket.send message, 0, "255.255.255.255", 31337
     
-    while to = receive_socket.gets.chomp
+    until to = @receive_socket.gets.chomp
     end
+    
+    puts to
 
     # recognizes and parses a multiple jump sequence
     if to.include?(" ")
