@@ -14,7 +14,7 @@ class Board
   end
    #REV: use the setter for this as well, very useful
    #it's something like:
-   #def []=(pos, value)  
+   #def []=(pos, value)
    #i,j=pos
    #@rows[i][j]=value   end
   def [](pos)
@@ -45,6 +45,12 @@ class Board
     print "  "
     (0..BOARD_SIZE-1).each {|x| print " #{x} "}
     print "\n\n"
+  end
+
+  def render
+    @rows.map do |row|
+      row.map {|spot| spot.icon unless spot.nil?}
+    end
   end
 
   def update
@@ -190,8 +196,8 @@ class Board
       end
     end
   end
-	#REV: I think this would use up unnecessary resources removing every piece 
-	# and then re-adding the piece after every move.  Unless you are planning to 
+	#REV: I think this would use up unnecessary resources removing every piece
+	# and then re-adding the piece after every move.  Unless you are planning to
 	#add undo functionality, you could just set the piece to nil
   def de_populate_rows
     @rows.each_with_index do |row, y|

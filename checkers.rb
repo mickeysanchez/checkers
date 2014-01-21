@@ -57,6 +57,7 @@ class Checkers
 end
 
 if __FILE__ == $PROGRAM_NAME
+  
   h1 = NetworkedPlayer.new("Mickey")
   h2 = NetworkedPlayer.new("Networked Player")
   Checkers.new(h1,h2).run
